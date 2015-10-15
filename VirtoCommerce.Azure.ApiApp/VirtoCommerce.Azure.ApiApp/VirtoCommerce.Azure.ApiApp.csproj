@@ -89,6 +89,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Unity.WebApi, Version=5.1.0.0, Culture=neutral, PublicKeyToken=43da31bc42a85347, processorArchitecture=MSIL">
@@ -132,7 +133,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="apiapp.json" />
-    <None Include="Properties\PublishProfiles\VirtoCommerceApp%28shipstation%29.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
