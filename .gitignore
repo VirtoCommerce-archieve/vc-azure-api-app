@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/VirtoCommerce.Azure.ApiApp/.vs
+/VirtoCommerce.Azure.ApiApp/VirtoCommerce.Azure.ApiApp/bin
+/VirtoCommerce.Azure.ApiApp/VirtoCommerce.Azure.ApiApp/obj
+/VirtoCommerce.Azure.ApiApp/packages
+/VirtoCommerce.Azure.ApiApp/VirtoCommerce.Azure.ApiApp/Properties/PublishProfiles
