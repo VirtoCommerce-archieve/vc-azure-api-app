@@ -248,15 +248,15 @@
               "value": "1"
             },
             {
-              "name": "AppId",
+              "name": "App_Id",
               "value": "[parameters('appId')]"
             },
             {
-              "name": "ApiKey",
+              "name": "Api_Key",
               "value": "[parameters('apiKey')]"
             },
             {
-              "name": "BasePath",
+              "name": "Base_Path",
               "value": "[parameters('basePath')]"
             }
           ]
