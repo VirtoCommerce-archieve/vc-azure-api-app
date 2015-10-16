@@ -50,7 +50,7 @@
     },
    "basePath": {
       "type": "string",
-      "defaultValue": "http://"
+      "defaultValue": "http"
     },
     "gatewayToApiAppSecret": {
       "defaultValue": "UlNTQXBpQXBw",
