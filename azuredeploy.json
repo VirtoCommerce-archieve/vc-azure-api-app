@@ -7,7 +7,7 @@
     },
     "apiAppName": {
       "type": "string",
-      "defaultValue": "VirtoCommerce.Azure.APIApp"
+      "defaultValue": "VirtoCommerce.APIApp"
     },
     "gatewayName": {
       "type": "string"
@@ -51,7 +51,7 @@
    "basePath": {
       "type": "string",
       "defaultValue": "http://"
-    }
+    },
     "gatewayToApiAppSecret": {
       "defaultValue": "UlNTQXBpQXBw",
       "type": "securestring"
