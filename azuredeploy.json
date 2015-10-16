@@ -40,21 +40,21 @@
         "2"
       ]
     },
-    "gatewayToApiAppSecret": {
-      "defaultValue": "UlNTQXBpQXBw",
-      "type": "securestring"
-    },
-	"appId": {
+    "appId": {
       "type": "string",
       "defaultValue": "App Id in VirtoCommerce account generated key"
     },
-	"apiKey": {
+   "apiKey": {
       "type": "string",
       "defaultValue": "HMAC generated API Key"
     },
-	"basePath": {
+   "basePath": {
       "type": "string",
-      "defaultValue": "http://[[path-to-admin]]"
+      "defaultValue": "http://"
+    }
+    "gatewayToApiAppSecret": {
+      "defaultValue": "UlNTQXBpQXBw",
+      "type": "securestring"
     }
   },
   "variables": {
