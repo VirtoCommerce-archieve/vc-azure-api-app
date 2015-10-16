@@ -43,7 +43,7 @@
     "gatewayToApiAppSecret": {
       "defaultValue": "UlNTQXBpQXBw",
       "type": "securestring"
-    }
+    },
 	"appId": {
       "type": "string",
       "defaultValue": "App Id in VirtoCommerce account generated key"
