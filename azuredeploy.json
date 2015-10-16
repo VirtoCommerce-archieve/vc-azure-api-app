@@ -44,6 +44,18 @@
       "defaultValue": "UlNTQXBpQXBw",
       "type": "securestring"
     }
+	"appId": {
+      "type": "string",
+      "defaultValue": "App Id in VirtoCommerce account generated key"
+    },
+	"apiKey": {
+      "type": "string",
+      "defaultValue": "HMAC generated API Key"
+    },
+	"basePath": {
+      "type": "string",
+      "defaultValue": "http://[[path-to-admin]]"
+    }
   },
   "variables": {
     "$packageId": "Microsoft.ApiApp",
@@ -277,7 +289,24 @@
         "gateway": {
           "resourceName": "[parameters('gatewayName')]"
         },
-        "dependencies": [ ]
+        "dependencies": [ ],
+		"siteConfig": {
+          "appSettings": [
+            {
+              "name": "AppId",
+              "value": "[parameters('appId')]"
+            },
+            {
+              "name": "ApiKey",
+              "value": "[parameters('apiKey')]"
+            },
+            {
+              "name": "BasePath",
+              "value": "[parameters('basePath')]"
+            }
+          ]
+        }
+		
       }
     }
    
