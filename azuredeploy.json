@@ -246,6 +246,18 @@
             {
               "name": "WEBSITE_START_SCM_ON_SITE_CREATION",
               "value": "1"
+            },
+            {
+              "name": "AppId",
+              "value": "[parameters('appId')]"
+            },
+            {
+              "name": "ApiKey",
+              "value": "[parameters('apiKey')]"
+            },
+            {
+              "name": "BasePath",
+              "value": "[parameters('basePath')]"
             }
           ]
         }
@@ -289,24 +301,7 @@
         "gateway": {
           "resourceName": "[parameters('gatewayName')]"
         },
-        "dependencies": [ ],
-		"siteConfig": {
-          "appSettings": [
-            {
-              "name": "AppId",
-              "value": "[parameters('appId')]"
-            },
-            {
-              "name": "ApiKey",
-              "value": "[parameters('apiKey')]"
-            },
-            {
-              "name": "BasePath",
-              "value": "[parameters('basePath')]"
-            }
-          ]
-        }
-		
+        "dependencies": [ ]
       }
     }
    
