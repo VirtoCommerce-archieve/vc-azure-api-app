@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Configuration;
 using System.Net;
 using System.Web.Http;
 using System.Web.Http.Description;
-using VirtoCommerce.SwaggerApiClient;
-using VirtoCommerce.SwaggerApiClient.Api;
-using VirtoCommerce.SwaggerApiClient.Model;
+using VirtoCommerce.Azure.ApiApp.Common;
+using VirtoCommerce.Client;
+using VirtoCommerce.Client.Api;
+using VirtoCommerce.Client.Model;
 
 namespace VirtoCommerce.Azure.ApiApp.Controllers
 {
@@ -16,11 +16,7 @@ namespace VirtoCommerce.Azure.ApiApp.Controllers
 
         public CatalogController()
         {
-            var apiKey = ConfigurationManager.AppSettings.Get("Api_Key");
-            var basePath = ConfigurationManager.AppSettings.Get("Base_Path");
-            var appId = ConfigurationManager.AppSettings.Get("App_Id");
-
-            var apiClient = new HmacApiClient(basePath, appId, apiKey);
+            var apiClient = new HmacApiClient(APIAppSettings.BasePath, APIAppSettings.AppId, APIAppSettings.ApiKey);
             _catalogClient = new CatalogModuleApi(apiClient);
         }
         
@@ -28,7 +24,7 @@ namespace VirtoCommerce.Azure.ApiApp.Controllers
         /// Get Catalogs list
         /// </summary>
         /// <remarks>Get common and virtual Catalogs list with minimal information included. Returns array of Catalog</remarks>
-		[HttpGet]        
+        [HttpGet]        
         [Route("")]
         public IEnumerable<VirtoCommerceCatalogModuleWebModelCatalog> GetAll()
         {

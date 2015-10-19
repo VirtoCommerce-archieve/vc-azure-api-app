@@ -1,7 +1,6 @@
 using Microsoft.Practices.Unity;
 using System.Web.Http;
 using Unity.WebApi;
-using VirtoCommerce.SwaggerApiClient.Client;
 
 namespace VirtoCommerce.Azure.ApiApp
 {
