@@ -1,31 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Configuration;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using VirtoCommerce.SwaggerApiClient;
 using VirtoCommerce.SwaggerApiClient.Api;
-using VirtoCommerce.SwaggerApiClient.Client;
 using VirtoCommerce.SwaggerApiClient.Model;
 
 namespace VirtoCommerce.Azure.ApiApp.Controllers
 {
     [RoutePrefix("api/order")]
     public class OrderController : ApiController
-    {        
+    {
+        private readonly OrderModuleApi _orderClient;
+
+        public OrderController()
+        {
+            var apiKey = ConfigurationManager.AppSettings.Get("Api_Key");
+            var basePath = ConfigurationManager.AppSettings.Get("Base_Path");
+            var appId = ConfigurationManager.AppSettings.Get("App_Id");
+
+            var apiClient = new HmacApiClient(basePath, appId, apiKey);
+            _orderClient = new OrderModuleApi(apiClient);
+        }
+
         /// <summary>
         /// Get Order by Id
         /// </summary>
         /// <remarks>Get Order by provided Id.</remarks>
 		[HttpGet]        
         [Route("")]
-        public VirtoCommerceOrderModuleWebModelCustomerOrder GetById(string basePath, string appId, string key, string orderId)
-        {
-            var apiClient = new HmacApiClient(basePath, appId, key);
-            var orderClient = new OrderModuleApi(apiClient);
-            return orderClient.OrderModuleGetById(orderId);
+        public VirtoCommerceOrderModuleWebModelCustomerOrder GetById(string orderId)
+        {            
+            return _orderClient.OrderModuleGetById(orderId);
         }
         
         /// <summary>
@@ -36,11 +42,9 @@ namespace VirtoCommerce.Azure.ApiApp.Controllers
         [HttpPut]
         [ResponseType(typeof(void))]
         [Route("")]
-        public IHttpActionResult Update(string basePath, string appId, string key, VirtoCommerceOrderModuleWebModelCustomerOrder order)
+        public IHttpActionResult Update(VirtoCommerceOrderModuleWebModelCustomerOrder order)
         {
-            var apiClient = new HmacApiClient(basePath, appId, key);
-            var orderClient = new OrderModuleApi(apiClient);
-            orderClient.OrderModuleUpdate(order);
+            _orderClient.OrderModuleUpdate(order);
             return StatusCode(HttpStatusCode.NoContent);
         }
         
@@ -52,11 +56,9 @@ namespace VirtoCommerce.Azure.ApiApp.Controllers
         [HttpPost]
         [ResponseType(typeof(void))]
         [Route("")]
-        public IHttpActionResult Create(string basePath, string appId, string key, VirtoCommerceOrderModuleWebModelCustomerOrder order)
+        public IHttpActionResult Create(VirtoCommerceOrderModuleWebModelCustomerOrder order)
         {
-            var apiClient = new HmacApiClient(basePath, appId, key);
-            var orderClient = new OrderModuleApi(apiClient);
-            orderClient.OrderModuleCreateOrder(order);
+            _orderClient.OrderModuleCreateOrder(order);
             return StatusCode(HttpStatusCode.NoContent);
         }
     }

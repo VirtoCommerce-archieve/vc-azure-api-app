@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
+using System.Configuration;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using VirtoCommerce.SwaggerApiClient;
 using VirtoCommerce.SwaggerApiClient.Api;
-using VirtoCommerce.SwaggerApiClient.Client;
 using VirtoCommerce.SwaggerApiClient.Model;
 
 namespace VirtoCommerce.Azure.ApiApp.Controllers
@@ -15,17 +12,27 @@ namespace VirtoCommerce.Azure.ApiApp.Controllers
     [RoutePrefix("api/catalog/catalogs")]
     public class CatalogController : ApiController
     {        
+        private readonly CatalogModuleApi _catalogClient;
+
+        public CatalogController()
+        {
+            var apiKey = ConfigurationManager.AppSettings.Get("Api_Key");
+            var basePath = ConfigurationManager.AppSettings.Get("Base_Path");
+            var appId = ConfigurationManager.AppSettings.Get("App_Id");
+
+            var apiClient = new HmacApiClient(basePath, appId, apiKey);
+            _catalogClient = new CatalogModuleApi(apiClient);
+        }
+        
         /// <summary>
         /// Get Catalogs list
         /// </summary>
         /// <remarks>Get common and virtual Catalogs list with minimal information included. Returns array of Catalog</remarks>
 		[HttpGet]        
         [Route("")]
-        public IEnumerable<VirtoCommerceCatalogModuleWebModelCatalog> GetAll(string basePath, string appId, string key)
+        public IEnumerable<VirtoCommerceCatalogModuleWebModelCatalog> GetAll()
         {
-            var apiClient = new HmacApiClient(basePath, appId, key);
-            var catalogClient = new CatalogModuleApi(apiClient);
-            return catalogClient.CatalogModuleCatalogsGetCatalogs();
+            return _catalogClient.CatalogModuleCatalogsGetCatalogs();
         }
 
         /// <summary>
@@ -35,11 +42,9 @@ namespace VirtoCommerce.Azure.ApiApp.Controllers
         /// <param name="id">The Catalog id.</param>
         [HttpGet]
         [Route("{id}")]
-        public VirtoCommerceCatalogModuleWebModelCatalog Get(string basePath, string appId, string key, string catalogId)
+        public VirtoCommerceCatalogModuleWebModelCatalog Get(string catalogId)
         {
-            var apiClient = new HmacApiClient(basePath, appId, key);
-            var catalogClient = new CatalogModuleApi(apiClient);
-            return catalogClient.CatalogModuleCatalogsGet(catalogId);
+            return _catalogClient.CatalogModuleCatalogsGet(catalogId);
         }
 
         /// <summary>
@@ -50,19 +55,10 @@ namespace VirtoCommerce.Azure.ApiApp.Controllers
         [HttpPut]
         [ResponseType(typeof(void))]
         [Route("")]
-        public IHttpActionResult Update(string basePath, string appId, string key, VirtoCommerceCatalogModuleWebModelCatalog catalog)
+        public IHttpActionResult Update(VirtoCommerceCatalogModuleWebModelCatalog catalog)
         {
-            var apiClient = new HmacApiClient(basePath, appId, key);
-            var catalogClient = new CatalogModuleApi(apiClient);
-            UpdateCatalog(catalogClient, catalog);
+            _catalogClient.CatalogModuleCatalogsUpdate(catalog);
             return StatusCode(HttpStatusCode.NoContent);
         }
-        
-        private void UpdateCatalog(CatalogModuleApi apiClient, VirtoCommerceCatalogModuleWebModelCatalog catalog)
-        {
-            apiClient.CatalogModuleCatalogsUpdate(catalog);
-        }
-
-
     }
 }
