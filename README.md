@@ -6,6 +6,7 @@ The VirtoCommerce Azure API App uses [VirtoCommerce.Client](https://www.nuget.or
 
 ## Deployment ##
 Click "Deploy to Azure" to start VirtoCommerce API App deployment to your account.
+
 [![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/)
 
 During the setup process provide App Id, Hmac Api Key and VirtoCommerce deployment web api base url.
