@@ -9,7 +9,7 @@ Click "Deploy to Azure" to start VirtoCommerce API App deployment to your accoun
 
 [![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/)
 
-During the setup process provide App Id, Hmac Api Key and VirtoCommerce deployment web api base url.
+During the setup process App Id, Hmac Api Key and VirtoCommerce deployment web api base url should be provided.
 
 In order to create Hmac key go to VirtoCommerce admin -> Configuration -> Security.
 
