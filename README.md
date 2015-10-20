@@ -26,7 +26,7 @@ Fill other properties (like gateway etc.) with the values required by Azure.
 Deploy the API App.
 
 ## Usage ##
-When the deployment completed successfully the VirtoCommerce.APIApp should appear in the list of API Apps of you Azure subscription. It can be used like any other API App by adding it to your Logic App.
+When the deployment completed successfully the VirtoCommerce.APIApp should appear in the list of API Apps of your Azure subscription. It can be used like any other API App by adding it to your Logic App.
 
 ## API provided by the App ##
 - Catalog management api.
