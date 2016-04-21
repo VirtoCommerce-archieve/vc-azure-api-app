@@ -4,6 +4,7 @@ using System.Web.Http.Description;
 using VirtoCommerce.Azure.ApiApp.Common;
 using VirtoCommerce.Client;
 using VirtoCommerce.Client.Api;
+using VirtoCommerce.Client.Client;
 using VirtoCommerce.Client.Model;
 
 namespace VirtoCommerce.Azure.ApiApp.Controllers
@@ -13,10 +14,9 @@ namespace VirtoCommerce.Azure.ApiApp.Controllers
     {
         private readonly CatalogModuleApi _productClient;
 
-        public ProductController()
+        public ProductController(Configuration apiConfiguration)
         {
-            var apiClient = new HmacApiClient(APIAppSettings.BasePath, APIAppSettings.AppId, APIAppSettings.ApiKey);
-            _productClient = new CatalogModuleApi(apiClient);
+            _productClient = new CatalogModuleApi(apiConfiguration);
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace VirtoCommerce.Azure.ApiApp.Controllers
         [Route("")]
         public VirtoCommerceCatalogModuleWebModelProduct GetById(string productId)
         {
-            return _productClient.CatalogModuleProductsGet(productId);
+            return _productClient.CatalogModuleProductsGetProductById(productId);
         }
 
         /// <summary>

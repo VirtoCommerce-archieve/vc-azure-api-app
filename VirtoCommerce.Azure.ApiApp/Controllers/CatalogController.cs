@@ -5,6 +5,7 @@ using System.Web.Http.Description;
 using VirtoCommerce.Azure.ApiApp.Common;
 using VirtoCommerce.Client;
 using VirtoCommerce.Client.Api;
+using VirtoCommerce.Client.Client;
 using VirtoCommerce.Client.Model;
 
 namespace VirtoCommerce.Azure.ApiApp.Controllers
@@ -14,10 +15,9 @@ namespace VirtoCommerce.Azure.ApiApp.Controllers
     {        
         private readonly CatalogModuleApi _catalogClient;
 
-        public CatalogController()
+        public CatalogController(Configuration apiConfiguration)
         {
-            var apiClient = new HmacApiClient(APIAppSettings.BasePath, APIAppSettings.AppId, APIAppSettings.ApiKey);
-            _catalogClient = new CatalogModuleApi(apiClient);
+            _catalogClient = new CatalogModuleApi(apiConfiguration);
         }
         
         /// <summary>
@@ -55,6 +55,12 @@ namespace VirtoCommerce.Azure.ApiApp.Controllers
         {
             _catalogClient.CatalogModuleCatalogsUpdate(catalog);
             return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        protected ApiClient GetApiClient()
+        {
+            var apiClient = new HmacApiClient(APIAppSettings.BasePath, APIAppSettings.AppId, APIAppSettings.ApiKey);
+            return apiClient;
         }
     }
 }

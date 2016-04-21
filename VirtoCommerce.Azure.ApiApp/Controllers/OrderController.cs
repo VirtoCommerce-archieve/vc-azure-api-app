@@ -1,9 +1,13 @@
-﻿using System.Net;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Web.Http;
 using System.Web.Http.Description;
 using VirtoCommerce.Azure.ApiApp.Common;
 using VirtoCommerce.Client;
 using VirtoCommerce.Client.Api;
+using VirtoCommerce.Client.Client;
 using VirtoCommerce.Client.Model;
 
 namespace VirtoCommerce.Azure.ApiApp.Controllers
@@ -13,10 +17,9 @@ namespace VirtoCommerce.Azure.ApiApp.Controllers
     {
         private readonly OrderModuleApi _orderClient;
 
-        public OrderController()
+        public OrderController(Configuration apiConfiguration)
         {
-            var apiClient = new HmacApiClient(APIAppSettings.BasePath, APIAppSettings.AppId, APIAppSettings.ApiKey);
-            _orderClient = new OrderModuleApi(apiClient);
+            _orderClient = new OrderModuleApi(apiConfiguration);
         }
 
         /// <summary>
@@ -29,7 +32,30 @@ namespace VirtoCommerce.Azure.ApiApp.Controllers
         {            
             return _orderClient.OrderModuleGetById(orderId);
         }
-        
+
+        /// <summary>
+        /// Get Order by criteria
+        /// </summary>
+        /// <remarks>Get Order by provided Id.</remarks>
+		[HttpGet]
+        [Route("search")]
+        public List<VirtoCommerceOrderModuleWebModelCustomerOrder> GetByCriteria(List<string> criteriaStoreIds, DateTime? criteriaStartDate, DateTime? criteriaEndDate, string status, string responseGroup)
+        {
+            var criteria = new VirtoCommerceDomainOrderModelSearchCriteria
+            {
+                ResponseGroup = responseGroup ?? "Full",
+                StoreIds = criteriaStoreIds,
+                StartDate = criteriaStartDate ?? DateTime.Today,
+                EndDate = criteriaEndDate ?? DateTime.Today.AddDays(1)
+            };
+            
+            var response = _orderClient.OrderModuleSearch(criteria).CustomerOrders;
+            if (!string.IsNullOrEmpty(status))
+                response = response.Where(order=> order.Status.Equals(status)).ToList();
+
+            return response;
+        }
+
         /// <summary>
         /// Updates the specified order.
         /// </summary>
