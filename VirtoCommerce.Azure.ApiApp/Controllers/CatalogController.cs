@@ -37,7 +37,7 @@ namespace VirtoCommerce.Azure.ApiApp.Controllers
         /// <remarks>Gets Catalog by id with full information loaded</remarks>
         /// <param name="id">The Catalog id.</param>
         [HttpGet]
-        [Route("{id}")]
+        [Route("{catalogId}")]
         public VirtoCommerceCatalogModuleWebModelCatalog Get(string catalogId)
         {
             return _catalogClient.CatalogModuleCatalogsGet(catalogId);

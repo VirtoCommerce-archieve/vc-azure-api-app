@@ -38,17 +38,21 @@ namespace VirtoCommerce.Azure.ApiApp.Controllers
         /// </summary>
         /// <remarks>Get Order by provided Id.</remarks>
 		[HttpGet]
-        [Route("search")]
-        public List<VirtoCommerceOrderModuleWebModelCustomerOrder> GetByCriteria(List<string> criteriaStoreIds, DateTime? criteriaStartDate, DateTime? criteriaEndDate, string status, string responseGroup)
+        [Route("search/{storeId}/{startDate}/{endDate}/{status}/{responseGroup}")]
+        public List<VirtoCommerceOrderModuleWebModelCustomerOrder> GetByCriteria(string storeId, DateTime? startDate, DateTime? endDate, string status, string responseGroup)
         {
             var criteria = new VirtoCommerceDomainOrderModelSearchCriteria
             {
-                ResponseGroup = responseGroup ?? "Full",
-                StoreIds = criteriaStoreIds,
-                StartDate = criteriaStartDate ?? DateTime.Today,
-                EndDate = criteriaEndDate ?? DateTime.Today.AddDays(1)
+                ResponseGroup = responseGroup ?? "Full"
             };
-            
+
+            if (!string.IsNullOrEmpty(storeId))
+                criteria.StoreIds = new List<string> { storeId };
+
+            criteria.StartDate = startDate ?? DateTime.Today;
+            criteria.EndDate = endDate ?? DateTime.Today.AddDays(1);
+
+
             var response = _orderClient.OrderModuleSearch(criteria).CustomerOrders;
             if (!string.IsNullOrEmpty(status))
                 response = response.Where(order=> order.Status.Equals(status)).ToList();
