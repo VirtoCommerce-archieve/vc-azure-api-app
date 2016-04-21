@@ -1,5 +1,5 @@
 # VirtoCommerce API App
-This is a VirtoCommerce Azure API App [API App](http://azure.microsoft.com/en-us/documentation/articles/app-service-api-apps-why-best-platform/ "What are API Apps?") for deployment into the Azure App Service. This API App implements integration points with VirtoCommerce platform api using Azure Logic Apps.
+This is a VirtoCommerce Azure [API App](http://azure.microsoft.com/en-us/documentation/articles/app-service-api-apps-why-best-platform/ "What are API Apps?") for deployment into the Azure App Service. This API App implements integration points with VirtoCommerce platform api using Azure Logic Apps.
 
 ## More Information ##
 The VirtoCommerce Azure API App uses [VirtoCommerce.Client](https://www.nuget.org/packages/VirtoCommerce.Client/ "library") to consume VirtoCommerce Web Api.
@@ -26,7 +26,7 @@ Fill other properties (like gateway etc.) with the values required by Azure.
 Deploy the API App.
 
 ## Usage ##
-When the deployment completed successfully the VirtoCommerce.APIApp should appear in the list of API Apps of you Azure subscription. It can be used like any other API App by adding it to your Logic App.
+When the deployment completed successfully the VirtoCommerce.APIApp should appear in the list of API Apps of your Azure subscription. It can be used like any other API App by adding it to your Logic App.
 
 ## API provided by the App ##
 - Catalog management api.
