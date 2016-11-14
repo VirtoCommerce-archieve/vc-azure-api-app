@@ -13,9 +13,9 @@ During the setup process App Id, Hmac Api Key and VirtoCommerce deployment web a
 
 In order to create Hmac key go to VirtoCommerce admin -> Configuration -> Security.
 
-Create a new user. Read more on creating new user in [VirtoCommerce documentation](http://docs.virtocommerce.com/x/wAHr).
+Create a new user. Read more on creating new user in [VirtoCommerce documentation](https://virtocommerce.com/docs/vc2userguide/users-management-roles-and-role-assignment).
 
-Create Hmac API key for the user. Give the user permissions to manage Catalogs and orders. For more information read [VirtoCommerce documentation](http://docs.virtocommerce.com/x/jwDr)
+Create Hmac API key for the user. Give the user permissions to manage Catalogs and orders. For more information read [VirtoCommerce documentation](https://virtocommerce.com/docs/vc2userguide/users-management-roles-and-role-assignment)
 
 Copy & paste the App Id and Api Key values from the just create user Hmac api key to the Azure deployment setup appropriate fields.
 
